@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { NavBar } from './About/NavBar.jsx';
 import { Banner } from './Banner/Banner.jsx';
 import { Skill } from './Skill/skill.jsx';
