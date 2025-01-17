@@ -1,31 +1,25 @@
-const express = require("express");
-const router = express.Router();
-const cors = require("cors");
-const nodemailer = require("nodemailer");
-const bodyParser = require('body-parser')
+const express = require('express');
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-// server used to send send emails
+
 const app = express();
+const port = 5000;
 app.use(cors());
-app.use(bodyParser.bodyParser.urlencoded({extended:true}));
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
-app.use(express.json());
-app.use("/", router);
-app.listen(5000, () => console.log("Server Running"));
-console.log(process.env.EMAIL_USER);
-console.log(process.env.EMAIL_PASS);
-
-const contactEmail = nodemailer.createTransport({
-  service: 'gmail',
+const transporter = nodemailer.createTransport({
+  service: 'gmail', // Use Gmail's SMTP service
   auth: {
-    user: "********@gmail.com",
-    pass: ""
+    user: 'akliluarse@gmail.com', // Your email address
+    pass: 'aklilu@gmail',     // Your Gmail App Password if you use 2FA
   },
 });
 
-contactEmail.verify((error) => {
+
+transporter.verify((error) => {
   if (error) {
     console.log(error);
   } else {
@@ -33,25 +27,31 @@ contactEmail.verify((error) => {
   }
 });
 
-router.post("/contact", (req, res) => {
-  const name = req.body.firstName + req.body.lastName;
-  const email = req.body.email;
-  const message = req.body.message;
-  const phone = req.body.phone;
-  const mail = {
-    from: name,
-    to: "********@gmail.com",
-    subject: "Contact Form Submission - Portfolio",
-    html: `<p>Name: ${name}</p>
-           <p>Email: ${email}</p>
-           <p>Phone: ${phone}</p>
-           <p>Message: ${message}</p>`,
+app.post('/contact', (req, res) => {
+  const { name, email, message } = req.body;
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+  const mailOptions = {
+    from: email,                  // Sender address (contact form email)
+    to: 'alamirew.wagaw@gmail.com',   // Receiver address (where you want to receive emails)
+    subject: `Contact Form: ${name}`, // Subject line
+    text: `You have received a new message from ${name} (${email}):\n\n${message}`, // Plain text body
+    html: `<p>You have received a new message from <strong>${name}</strong> (${email}):</p><p>${message}</p>`, // HTML body
   };
-  contactEmail.sendMail(mail, (error) => {
+
+
+
+  transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      res.json(error);
-    } else {
-      res.json({ code: 200, status: "Message Sent" });
+      console.error('Error sending email:', error);
+      return res.status(500).json({ error: 'Failed to send email' });
     }
+    console.log('Email sent:', info.response);
+    res.status(200).json({ success: 'Email sent successfully' });
   });
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
