@@ -1,54 +1,50 @@
+// server.js
 const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config();
 
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
+
+// Middleware
 app.use(cors());
+app.use(cors({ origin: '*' }));
 
 app.use(bodyParser.json());
 
+// Create a nodemailer transporter using your email service (e.g., Gmail)
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // Use Gmail's SMTP service
+  service: 'gmail', // or use another email provider
   auth: {
-    user: 'akliluarse@gmail.com', // Your email address
-    pass: 'aklilu@gmail',     // Your Gmail App Password if you use 2FA
+    user: process.env.EMAIL, // Your email
+    pass: process.env.EMAIL_PASSWORD, // Your email password or an app-specific password
   },
 });
+// console.log(process.env.EMAIL);
+// console.log(process.env.EMAIL_PASSWORD);
+// console.log(process.env.RECEIVER_EMAIL);
 
-
-transporter.verify((error) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Ready to Send");
-  }
-});
-
-app.post('/contact', (req, res) => {
-  const { name, email, message } = req.body;
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'All fields are required' });
-  }
+// API route to send email
+app.post('/send-email', (req, res) => {
+ 
+  const { firstName, lastName,email,phone ,message } = req.body;
+  // Email options
   const mailOptions = {
-    from: email,                  // Sender address (contact form email)
-    to: 'alamirew.wagaw@gmail.com',   // Receiver address (where you want to receive emails)
-    subject: `Contact Form: ${name}`, // Subject line
-    text: `You have received a new message from ${name} (${email}):\n\n${message}`, // Plain text body
-    html: `<p>You have received a new message from <strong>${name}</strong> (${email}):</p><p>${message}</p>`, // HTML body
+    from: email, // sender's email
+    to: process.env.RECEIVER_EMAIL, // receiver's email (your email address)
+    subject: `Message from ${firstName} - Portfolio Contact Form`,
+    text: `You have received a new message from ${firstName} ${lastName} ${phone} (${email}):\n\n${message}`,
   };
 
-
-
+  // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.error('Error sending email:', error);
-      return res.status(500).json({ error: 'Failed to send email' });
+      return res.status(500).send({ message: 'Error sending email' });
     }
-    console.log('Email sent:', info.response);
-    res.status(200).json({ success: 'Email sent successfully' });
+    res.status(200).send({ message: 'Email sent successfully' });
   });
 });
 

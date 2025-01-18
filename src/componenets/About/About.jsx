@@ -15,7 +15,7 @@ import TrackVisibility from "react-on-screen";
                 {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__fadeInLeft" : ""}> 
                 <div className="aboutImage-bx">
-                <img src={""} alt="about image" className="aboutImage" />
+                <img src={"alamir"} alt="about image" className="aboutImage" />
                 </div>
                 </div>}
                 </TrackVisibility>

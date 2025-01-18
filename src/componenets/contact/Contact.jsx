@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import myImage from "../../assets/image/contact-img.svg";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
+import axios from "axios";
 
 export const Contact = () => {
   const formInitialDetails = {
@@ -25,23 +26,43 @@ export const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setButtonText("Sending...");
-    let response = await fetch("http://localhost:5000/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify(formDetails),
-    });
-    setButtonText("Send");
-    let result = await response.json();
-    setFormDetails(formInitialDetails);
-    if (result.code == 200) {
-      setStatus({ succes: true, message: 'Message sent successfully'});
-    } else {
+
+    // setButtonText("Sending...");
+    
+    // if (!formDetails.firstName || !formDetails.lastName || !formDetails.message || !formDetails.phone || !formDetails.email) {
+    //   setStatus('All fields are required.');
+    //   return;
+    // }
+       
+
+    try {
+      const response = await axios.post('http://localhost:5000/send-email', formDetails);
+  //  setButtonText('send');
+       
+      if (response.status === 200) {
+        setStatus({ succes: true, message: 'Message sent successfully'});
+        setFormDetails(formInitialDetails);
+      }
+    } catch (error) {
       setStatus({ succes: false, message: 'Something went wrong, please try again later.'});
     }
   };
+  //   let response = await fetch("http://localhost:5000/contact", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json;charset=utf-8",
+  //     },
+  //     body: JSON.stringify(formDetails),
+  //   });
+  //   setButtonText("Send");
+  //   let result = await response.json();
+  //   setFormDetails(formInitialDetails);
+  //   if (result.code == 200) {
+  //     setStatus({ succes: true, message: 'Message sent successfully'});
+  //   } else {
+  //     setStatus({ succes: false, message: 'Something went wrong, please try again later.'});
+  //   }
+  // };
 
   return (
     <section className="contact" id="connect">
