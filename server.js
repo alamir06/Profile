@@ -1,9 +1,12 @@
 // server.js
-const express = require('express');
-const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-require('dotenv').config();
+import express from 'express';
+import nodemailer from 'nodemailer';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();  // This loads the environment variables from the .env file
+
 
 
 const app = express();
@@ -47,6 +50,18 @@ app.post('/send-email', (req, res) => {
     res.status(200).send({ message: 'Email sent successfully' });
   });
 });
+import winston from 'winston';
+
+const logger = winston.createLogger({
+  level: 'info',
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'server.log' })
+  ]
+});
+
+logger.info('Server started');
+logger.error('Error sending email');
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
