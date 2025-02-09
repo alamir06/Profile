@@ -52,7 +52,7 @@ export const Skill=()=>{
                                {({ isVisible }) =>
                                      <div className={isVisible ? "animate__animated animate__jackInTheBox" : ""}> 
                                  <h2>Skills</h2>
-                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                 <p>The following is my Skills in web development.</p>
                                </div>}
                                </TrackVisibility>
                       
@@ -67,7 +67,7 @@ export const Skill=()=>{
                             </div>
                           
                          
-                            <h5> frontend Development</h5>
+                            <h5> Frontend Developer</h5>
                        
                         </div>
                         <div className="item" >
@@ -75,21 +75,21 @@ export const Skill=()=>{
                             <div className="percent">
                             <img src={skill1} alt="image"/>
                             </div>
-                            <h5> Backend Development</h5>
+                            <h5> Backend Developer</h5>
                         </div>
                         <div className="item" >
                             <img src={sk3} alt="image"/>
                             <div className="percent">
                             <img src={skill3} alt="image"/>
                             </div>
-                            <h5> fullStack Development</h5>
+                            <h5> FullStack Developer</h5>
                         </div>
                         <div className="item" >
                             <img src={sk4} alt="image"/>
                             <div className="percent">
                             <img src={skill1} alt="image"/>
                             </div>
-                            <h5> postgress Development</h5>
+                            <h5> Postgress Database</h5>
                         </div>
                       
                      </Carousel>

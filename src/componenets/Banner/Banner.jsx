@@ -75,7 +75,7 @@ export const Banner = () => {
           <TrackVisibility>
           {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__flipInX" : ""}> 
-           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+           <p>I'm react Developer,Backend Developer with Postgress Database.</p>
           </div>}
           </TrackVisibility>
            
@@ -112,7 +112,7 @@ export const Banner = () => {
               <TrackVisibility>
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__fadeInLeft" : ""}> 
-          <li className="nav-item"><a href="https://maps.app.goo.gl/1c8uBrNivZYA3QMKA"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>Addis Ababa,Ethiopia</a></li>
+          <li className="nav-item"><a href="https://maps.app.goo.gl/kkt9yEJuQKFdFXKM8"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>Bahir Dar,Ethiopia</a></li>
           
           </div>}
               </TrackVisibility>

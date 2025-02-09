@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row ,Col} from "react-bootstrap";
 import aboitImage from "../../assets/image/a2.jpg"
 import TrackVisibility from "react-on-screen";
-
+// import abb from "../../assets/image/aboutImage.jfif";
  const About=()=>{
 
 
@@ -15,7 +15,7 @@ import TrackVisibility from "react-on-screen";
                 {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__fadeInLeft" : ""}> 
                 <div className="aboutImage-bx">
-                <img src={"alamir"} alt="about image" className="aboutImage" />
+                <img src={"about image"} alt="about image" className="aboutImage" />
                 </div>
                 </div>}
                 </TrackVisibility>
@@ -23,7 +23,7 @@ import TrackVisibility from "react-on-screen";
                 <Col sm={12} md={6} xl={8}>
                 <div className="about-bx">
                  <h2>About me</h2>
-                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
+                 <p>My name is Alamirew wagaw. i'm react developer, frontend developer, backend developer and fullstack developer with Postgress database for relational database and mongodb for non releation database. my passionate is meet customer needs with the modern frameworks React and Expressjs with nodejs run time environment.let's contact me and ask what you want. i would like to express one thing that is i really satisfy you by communication without boring you. </p>
                  </div>
                 </Col>
             </Row>

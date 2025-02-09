@@ -16,7 +16,7 @@ import "animate.css";
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn": ""}>
                <h2>Projects</h2>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+              <p>The following are some of my Project that i have done before. To  view in detail first hover on image and the read what it is after that click the icon button to view on github acount</p>
              </div>}
              </TrackVisibility>
              <Tab.Container id="projects-tabs" defaultActiveKey="first">

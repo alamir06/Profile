@@ -1,6 +1,6 @@
 
 import { Col } from "react-bootstrap";
-
+import viewImage from "../../assets/image/view.png";
 
 export const ProjectCard=(props)=>{
 
@@ -9,6 +9,7 @@ export const ProjectCard=(props)=>{
         <div className="proj-imgbx">
           <img src={props.imgUrl} />
           <div className="proj-txtx">
+          <a href={props.link}><img src={viewImage} alt="icon image" className="viewImage"/></a>
             <h4>{props.title}</h4>
             <span>{props.description}</span>
             
